@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <body>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mb-0">
+            {{ article.problemNumber }} - {{article.title}}
+          </h2>
+          <p class="muted-text">
+            {{ article.date|date:"d/m/Y" }} - By {{ article.authorID}}
+          </p>
+        </div>
+
+
+        <div class="card mb-4">
+          <div class=card-body>
+            <div class="card">
+              <div class="card-block my-2">
+                <h4 class="mb-0 ml-2"> Description </h4>
+              </div>
+              <div class="card-text mx-4 mb-4">
+                {{ article.body }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-deck mb-4">
+          <div class="card">
+            <div class=card-body>
+              <div class="card">
+                <div class="card-block my-2">
+                  <h4 class="mb-0 ml-2"> Inputs </h4>
+                </div>
+                <div class="card-text mx-4 mb-4">
+                  {{ article.inputs }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class=card-body>
+              <div class="card">
+                <div class="card-block my-2">
+                  <h4 class="mb-0 ml-2"> Outputs </h4>
+                </div>
+                <div class="card-text mx-4 mb-4">
+                  {{ article.inputs }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class=card-body>
+            <div class="card">
+              <div class="card-block my-2">
+                <h4 class="mb-0 ml-2"> Code </h4>
+              </div>
+              <div class="card-text mx-4 mb-4">
+                <pre class="prettyprint">{{ article.bodyCode }}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html> 

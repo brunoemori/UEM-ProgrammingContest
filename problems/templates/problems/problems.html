@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <body>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mb-5"> Problems </h2>
+        </div>
+        
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title"> Your articles </h4>
+              {% if ownArticles %}
+                {% for article in ownArticles %}
+                <div class="card card-primary my-4">
+                  <div class="card-block my-2">
+                    <h4 class="mb-0">
+                      <a class="card-text mx-4" href="/wiki/{{article.problemNumber}}"> 
+                        {{ article.problemNumber }} - {{article.title}}
+                      </a>
+                    </h4>
+                    <p class="muted-text mx-4"> {{ article.date|date:"d/m/Y" }} </p>
+                  </div>
+                </div>
+                {% endfor %}
+              {% else %}
+              <div>
+                <p class="muted-text"> You don't have any articles. </p>
+              </div>
+
+              {% endif %}
+            </div>
+            <div class="card-footer my-0" style="background-color:#ffffff">
+              <button type="button" class="btn button-secondary mr-4"> New </button>
+              <a href="/problems/yourarticles">
+                <button type="button" class="btn button-secondary"> List </button>
+              </a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title"> Recent articles </h4>
+              {% if otherArticles %}
+                {% for article in otherArticles %}
+                  <div class="card card-primary my-4">
+                    <div class="card-block my-2">
+                      <h4 class="mb-0">
+                        <a class="card-text mx-4" href="/wiki/{{article.problemNumber}}">
+                          {{ article.problemNumber }} - {{ article.title }}
+                        </a>
+                      </h4>
+                      <p class="muted-text mx-4"> {{ article.date|date:"d/m/Y" }} - By {{ article.authorID }}</p>
+                    </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div>
+                  <p class="muted-text"> No recent articles found. </p>
+                </div>
+              {% endif %}
+            </div>
+            <div class="card-footer" style="background-color:#ffffff">
+              <a href="/problems/otherarticles">
+                <button type="button" class="btn button-secondary"> List </button>
+              </a>
+            </div>
+          </div>
+        </div>  
+      </section>
+    </div>
+  </body>
+</html>

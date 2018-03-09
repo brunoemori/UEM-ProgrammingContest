@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <body>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mb-5"> Your articles </h2>
+        </div>
+          <div class="card">
+            <div class="card-body">
+              {% if not ownArticles %}
+                <div>
+                  <p class="muted-text"> You don't have any articles. </p>
+                </div>
+              {% else %}
+                {% for article in ownArticles%}
+                <div class="card card-primary my-4">
+                  <div class="card-block my-2">
+                    <h4 class="mb-0">
+                      <a class="card-text mx-4" href="/wiki/{{article.problemNumber}}"> 
+                        {{ article.problemNumber }} - {{article.title}}
+                      </a>
+                    </h4>
+                    <p class="muted-text mx-4"> {{ article.date|date:"d/m/Y" }} </p>
+                  </div>
+                </div>
+                {% endfor %}
+                
+                <div class="card pagination text-center">
+                  <span class="step-link">
+                    {% if ownArticles.has_previous %}
+                      <a href="?page=1" class="mx-4">&laquo; First </a>
+                      <a href="?page={{ ownArticles.previous_page_number }}"> Previous </a>
+                    {% else %}
+                      <a class="disabled invisible mx-4">&laquo; First </a>
+                      <a class="disabled invisible"> Previous </a>
+                    {% endif %}
+
+                    <span class="current mx-4">
+                      Page {{ ownArticles.number }} of {{ ownArticles.paginator.num_pages }}
+                    </span>
+
+                    {% if ownArticles.has_next %}
+                      <a href="?page={{ ownArticles.next_page_number }}" class="mx-4"> Next </a>
+                      <a href="?page={{ ownArticles.paginator.num_pages }}"> Last &raquo; </a>
+                    {% else %}
+                      <a class="disables invisible mx-4"> Next </a>
+                      <a class="disabled invisible"> Last &raquo; </a>
+                    {% endif %}
+                  </span>
+                </div>
+
+              {% endif %}
+            </div>
+            <div class="card-footer my-0" style="background-color:#ffffff">
+              <button type="button" class="btn button-secondary mr-4"> New </button>
+            </div>
+          </div>
+      </section>
+    </div> 
+  </body>
+</html>
