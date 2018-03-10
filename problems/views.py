@@ -7,12 +7,12 @@ from wiki.models import Article
 def problems(request):
     articleList = Article.objects.all()
     try:
-        ownArticles = articleList.filter(authorID=request.user.id).order_by('date')[:5]
+        ownArticles = articleList.filter(authorID=request.user.id).order_by('-date')[:5]
     except ObjectDoesNotExist:
         ownArticles = None
     
     try:
-        otherArticles = articleList.exclude(authorID=request.user.id).order_by('date')[:5]
+        otherArticles = articleList.exclude(authorID=request.user.id).order_by('-date')[:5]
     except ObjectDoesNotExist:
         otherArticles = None
 
@@ -21,7 +21,7 @@ def problems(request):
 
 def ownProblems(request):
     try:
-        ownArticlesList = Article.objects.all().filter(authorID=request.user.id).order_by('date')
+        ownArticlesList = Article.objects.all().filter(authorID=request.user.id).order_by('-date')
         paginator = Paginator(ownArticlesList, 10)
 
         page = request.GET.get('page')
@@ -34,7 +34,7 @@ def ownProblems(request):
 
 def otherProblems(request):
     try:
-        otherArticlesList = Article.objects.all().exclude(authorID=request.user.id).order_by('date')
+        otherArticlesList = Article.objects.all().exclude(authorID=request.user.id).order_by('-date')
         paginator = Paginator(otherArticlesList, 10)
 
         page = request.GET.get('page')
