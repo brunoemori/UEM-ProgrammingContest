@@ -10,23 +10,20 @@ class SignUpForm(UserCreationForm):
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'}), label='')
 
     username = forms.CharField(max_length=64, required=True, 
-        widget=forms.TextInput(attrs={'placeholder': "Username (identification)"}), label='')
+        widget=forms.TextInput(attrs={'placeholder': "Username (identification)"}), label='',
+        error_messages={'': 'Username already used.'})
 
-    email = forms.EmailField(max_length=128, required=True,
+    email = forms.EmailField(max_length=32, required=True,
         widget=forms.TextInput(attrs={'placeholder': "Email"}), label='')
 
     avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
     
-    password1 = forms.CharField(max_length=16, required=True, 
-        widget=forms.TextInput(attrs={'placeholder': 'Password'}), label='')
+    password1 = forms.CharField(max_length=16, 
+        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
 
-    password2 = forms.CharField(max_length=16, required=True, 
-        widget=forms.TextInput(attrs={'placeholder': 'Confirm password'}), label='')
-
-    def __init__(self, *args, **kwargs):
-        super(UserCreationForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].help_text = None
-
+    password2 = forms.CharField(max_length=16,
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}), label='')
+ 
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'avatar')
