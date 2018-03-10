@@ -22,7 +22,7 @@
               {% if form.non_field_errors %}
                 <div class="alert alert-danger mt-4">
                 {% for error in form.non_field_errors %}
-                  <a href="/wiki/{{ form.articleNumber.value }}">
+                  <a href="/wiki/{{ form.problemNumber.value }}">
                     <strong> {{ error|escape }} </strong>
                   </a>
                   {% endfor %}
