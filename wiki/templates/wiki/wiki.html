@@ -2,6 +2,10 @@
 {% include "sidebar.html" %}
 
 <html>
+  <head>  
+    <link rel="stylesheet" href="/static/css/codemirror.css">
+  </head>
+
   <body>
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
@@ -13,7 +17,6 @@
             {{ article.date|date:"d/m/Y" }} - By {{ article.authorID}}
           </p>
         </div>
-
 
         <div class="card mb-4">
           <div class=card-body>
@@ -31,7 +34,7 @@
         <div class="card-deck mb-4">
           <div class="card">
             <div class=card-body>
-              <div class="card">
+              <div class="card mx-0">
                 <div class="card-block my-2">
                   <h4 class="mb-0 ml-2"> Inputs </h4>
                 </div>
@@ -44,7 +47,7 @@
 
           <div class="card">
             <div class=card-body>
-              <div class="card">
+              <div class="card mx-0">
                 <div class="card-block my-2">
                   <h4 class="mb-0 ml-2"> Outputs </h4>
                 </div>
@@ -63,7 +66,8 @@
                 <h4 class="mb-0 ml-2"> Code </h4>
               </div>
               <div class="card-text mx-4 mb-4">
-                <pre class="prettyprint">{{ article.bodyCode }}</pre>
+                <textarea class="codemirror-textarea">{{ article.bodyCode}}
+                </textarea>
               </div>
             </div>
           </div>
@@ -71,6 +75,12 @@
 
       </section>
     </div>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/js/codemirror.js"></script>
+    <script src="/static/js/text-area.js"></script>
+
+    <!-- Modes -->
+    <script src="/static/mode/clike/clike.js"></script>
   </body>
 </html> 
