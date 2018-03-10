@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     url(r'^(\d+)$', views.getPage),
+    url(r'^newpage$', views.newPage)
 ]
