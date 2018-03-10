@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <head>  
+    <link rel="stylesheet" href="/static/css/codemirror.css">
+  </head>
+
+  <body>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mb-5"> Create new article </h2>
+        </div>
+
+        <div class="module form-module" style="max-width:none;">
+          <div></div>
+          <div class="form">
+            <form method="post">
+              {% csrf_token %}
+              
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger mt-4">
+                {% for error in form.non_field_errors %}
+                  <a href="/wiki/{{ form.articleNumber.value }}">
+                    <strong> {{ error|escape }} </strong>
+                  </a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {% if messages %}
+                <div class="alert alert-success mt-4">
+                {% for msg in messages %}
+                  <strong> {{ msg }} </strong>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {{ form.problemNumber }}
+              {{ form.title }}
+              {{ form.body }}
+              
+              <div class="card-deck mb-4">
+                <div class="card">
+                  {{ form.inputs }}
+                </div>
+                <div class="card">
+                  {{ form.outputs }}
+                </div>
+              </div>
+              
+              <div class="card-block my-2">  
+                <h4 class="mb-0 ml-2"> Code </h4>
+              </div>
+              
+              {{ form.bodyCode }}
+ 
+              <button type="submit" class="mt-4"> Create </button>
+
+            </form>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <script src="/static/js/tab.js"></script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/js/codemirror.js"></script>
+    <script src="/static/js/input.js"></script>
+
+    <!-- Modes -->
+    <script src="/static/mode/clike/clike.js"></script>
+
+  </body>
+</html>
+
