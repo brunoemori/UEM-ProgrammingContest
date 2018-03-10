@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, get_user_model
 User = get_user_model()
 
 class UserLoginForm(forms.Form):
-    #username = email
     email = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
