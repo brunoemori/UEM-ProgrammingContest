@@ -9,12 +9,12 @@ def signup(request):
             user = form.save(commit=False)
             user.firstName = form.cleaned_data.get('first_name')
             user.lastName = form.cleaned_data.get('last_name')
-
-            image = form.clean_image()
-
+            
+            image = form.cleaned_data.get('avatar')
+                
             if (image):
                 user.avatar = request.FILES['avatar']
-
+    
             user.save()
                 
             return redirect('/')
