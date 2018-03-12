@@ -7,7 +7,7 @@
   <div></div>
   <div class="form">
     <h2 align="center">Create your account</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.email }}
       {{ form.password1 }}
@@ -15,16 +15,13 @@
       {{ form.first_name }}
       {{ form.last_name }}
       {{ form.username }}
-      {{form.avatar.help_text}} {{ form.avatar }}
+      {{ form.avatar.help_text }} {{ form.avatar }}
       {% if form.non_field_errors %}
-        <div class="alert alert-danger">
-          <strong>{{ form.non_field_errors }}</strong>
-        </div>
-      {% endif %}
-      {% if form.errors %}  
-        <div class="alert alert-danger">
-          <strong>{{ form.errors }}</strong>
-        </div>
+        {% for msg in form.non_field_errors %}
+          <div class="alert alert-danger">
+            <strong>{{ msg }}</strong>
+          </div>
+        {% endfor %}
       {% endif %}
 
       <button type="submit">Register</button>
