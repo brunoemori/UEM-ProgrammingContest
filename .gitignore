@@ -104,3 +104,4 @@ configs.py
 *.swp
 migrations/
 *.sqlite3
+profile_pics/
