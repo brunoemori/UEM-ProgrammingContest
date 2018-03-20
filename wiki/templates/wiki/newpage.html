@@ -7,10 +7,15 @@
   </head>
 
   <body>
+    <title> UEM-PC Wiki New Article </title>
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
         <div class="my-auto">
-          <h2 class="mb-5"> Create new article </h2>
+          {% if isEditing %}
+           <h2 class="mb-5"> Edit article: {{form.problemNumber.value}} </h2>
+          {% else %}
+            <h2 class="mb-5"> Create new article </h2>
+          {% endif %}
         </div>
 
         <div class="module form-module" style="max-width:none;">
@@ -36,8 +41,12 @@
                   {% endfor %}
                 </div>
               {% endif %}
-
-              {{ form.problemNumber }}
+              
+              {% if not isEditing%}
+                {{ form.problemNumber }}
+              {% else %}
+              <input type="text" name="problemNumber" value="{{form.problemNumber.value}}" required id="id_problemNumber" placeholder="Problem number" readonly/>
+              {% endif %}
               {{ form.title }}
               {{ form.body }}
               
@@ -55,8 +64,12 @@
               </div>
               
               {{ form.bodyCode }}
- 
-              <button type="submit" class="mt-4"> Create </button>
+              
+              {% if isEditing %}
+                <button type="submit" class="mt-4"> Edit </button>
+              {% else %}
+                <button type="submit" class="mt-4"> Create </button>
+              {% endif %}
 
             </form>
           </div>

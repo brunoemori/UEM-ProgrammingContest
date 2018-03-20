@@ -7,6 +7,7 @@
   </head>
 
   <body>
+    <title> UEM-PC Wiki Problem {{article.problemNumber}} </title>
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
         <div class="my-auto">
@@ -52,7 +53,7 @@
                   <h4 class="mb-0 ml-2"> Outputs </h4>
                 </div>
                 <div class="card-text mx-4 mb-4">
-                  {{ article.inputs }}
+                  {{ article.outputs }}
                 </div>
               </div>
             </div>
@@ -71,8 +72,14 @@
               </div>
             </div>
           </div>
+          {% if user.username == article.authorID.username %}
+            <div class="card-footer my-0">
+              <a href="/wiki/edit/{{article.problemNumber}}">
+                <button type="button" class="btn button-secondary mr-4"> Edit </button>
+              </a>
+            </div>
+          {% endif %}
         </div>
-
       </section>
     </div>
 
