@@ -104,3 +104,7 @@ textarea {
   resize: none;
   width: 100%;
 }
+
+a {
+  color: #000000;
+}
