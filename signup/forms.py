@@ -10,7 +10,7 @@ class SignUpForm(UserCreationForm):
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'}), label='')
 
     username = forms.CharField(max_length=64, 
-        widget=forms.TextInput(attrs={'placeholder': "Username (identification)"}), label='')
+        widget=forms.TextInput(attrs={'placeholder': "Username"}), label='')
 
     email = forms.CharField(max_length=32,
         widget=forms.TextInput(attrs={'placeholder': "Email"}), label='')
@@ -29,6 +29,11 @@ class SignUpForm(UserCreationForm):
 
     def clean(self):
         cleanedData = self.cleaned_data
+        if (cleanedData.get('first_name') == None):
+            forms.ValidationError('\'First Name\' field cannot be empty')
+
+        if (cleanedData.get('last_name') == None):
+            forms.ValidationError('\'Last Name\' field cannot be empty')
 
         if (CustomUser.objects.all().filter(username=cleanedData.get('username'))):
             raise forms.ValidationError('Username already in use.')

@@ -4,16 +4,15 @@ import os
 
 class UserManager(BaseUserManager):
     def createUser(self, email, password, username, **extraFields):
-        if (not email):
-            raise ValueError("User must have an email address.")
-
         if (not password):
             raise ValueError("User must have a password.")
 
         if (not username):
             raise ValueError('User must have an username')
         
-        email = self.normalize_email(email)
+        if (email):
+            email = self.normalize_email(email)
+
         userObj = self.model(email=email, username=username, **extraFields)
         userObj.set_password(password)
         userObj.save(using=self._db)
@@ -33,21 +32,21 @@ def get_avatar_path(instance, filename):
     return os.path.join('static/profile_pics/' + str(instance.id), filename)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    firstName = models.CharField(max_length=64)
-    lastName = models.CharField(max_length=64)
+    firstName = models.CharField(max_length=64, blank=False)
+    lastName = models.CharField(max_length=64, blank=False)
     username = models.CharField(max_length=32, unique=True)
     bio = models.CharField(max_length=128, blank=True)
-    email = models.EmailField(max_length=128, unique=True)
+    email = models.EmailField(max_length=128)
     isUserOnline = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     numArticles = models.PositiveIntegerField(default=0)
     dateJoined = models.DateTimeField(auto_now_add=True)
     avatar = models.ImageField(blank=True, upload_to=get_avatar_path, default='static/profile_pics/default.jpeg')
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
 
     #Needed for creating superuser.
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
 
