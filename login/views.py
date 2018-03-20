@@ -9,10 +9,10 @@ def login(request):
     form = UserLoginForm(request.POST or None)
 
     if (form.is_valid()):
-        email = form.cleaned_data.get('email')
+        usern = form.cleaned_data.get('username')
         passw = form.cleaned_data.get('password')
 
-        user = authenticate(username=email, password=passw)
+        user = authenticate(username=usern, password=passw)
         auth_login(request, user)
         user.isUserOnline = True
         user.save()
