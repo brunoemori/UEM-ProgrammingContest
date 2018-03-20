@@ -23,15 +23,16 @@ class ArticleForm(forms.ModelForm):
         fields=('title', 'problemNumber', 'inputs', 'outputs', 'body', 'bodyCode')
 
     def clean(self, *args, **kwargs):
-        articleNumber = self.cleaned_data.get('problemNumber')
+        if (not Article.objects.filter(problemNumber = self.instance.problemNumber).exists()):
+            articleNumber = self.cleaned_data.get('problemNumber')
+            try:
+                exists = Article.objects.all().filter(problemNumber=articleNumber)
 
-        try:
-            exists = Article.objects.all().filter(problemNumber=articleNumber)
+            except Article.DoesNotExists:
+                exists = None
 
-        except Article.DoesNotExists:
-            exists = None
-
-        if (exists):
-            raise forms.ValidationError('This problem already exists on this wiki.')
+            if (exists):
+                raise forms.ValidationError('This problem already exists on this wiki.')
     
-        return super(ArticleForm, self).clean(*args, **kwargs)
+        else:
+            return super(ArticleForm, self).clean(*args, **kwargs)
