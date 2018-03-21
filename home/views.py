@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from wiki.models import Article
 
-@login_required()
+#@login_required()
 def home(request):
     return render(request, 'home/home.html', {"user": request.user})
 
