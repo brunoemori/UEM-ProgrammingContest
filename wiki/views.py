@@ -77,7 +77,6 @@ def deletePage(request, articleUrl):
         return redirect('/home')
 
     if (request.method == 'POST'):
-        print("Here")
         form = ArticleForm(request.POST, instance=article)
         article.delete()
         messages.success(request, 'Article' + str(article.problemNumber) + ' successfully deleted!')
