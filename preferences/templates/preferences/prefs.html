@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <body>
+    <title> UEM-PC User preferences </title>
+    
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mb-5"> Your preferences</h2>
+        </div>
+
+        {% if messages %}
+          {% for msg in messages %}
+            {% if msg.tags == "error" %}
+            <div class="alert alert-danger mt-4">
+              <strong> {{ msg }} </strong>
+            </div>
+            {% else %}
+            <div class="alert alert-success mt-4">
+              <strong> {{ msg }} </strong>
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        <div class="module form-module" style="max-width:none;"> 
+          <div></div>
+          <div class=form>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %} 
+              {{ form.firstName }}
+              {{ form.lastName }}
+              {{ form.email }}
+              {{ form.bio }}
+              {{ form.password1 }}
+              {{ form.password2 }}
+              {{ form.avatar }}
+              {{ form.useDefaultAvatar }}
+              <p align="center"> {{form.useDefaultAvatar.help_text}} </p>
+              <button class="mt-4" type="submit"> Save </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
