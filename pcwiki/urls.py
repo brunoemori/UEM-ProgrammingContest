@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^wiki/', include('wiki.urls')),
     url(r'^home/', include('home.urls')),
     url(r'^problems/', include('problems.urls')),
-    url(r'^$', RedirectView.as_view(url='login/', permanent=False))
+    url(r'^$', RedirectView.as_view(url='home/', permanent=False))
 ]
 
 if (settings.DEBUG):
