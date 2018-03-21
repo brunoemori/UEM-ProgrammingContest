@@ -12,7 +12,7 @@ class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=64, 
         widget=forms.TextInput(attrs={'placeholder': "Username"}), label='')
 
-    email = forms.CharField(max_length=32,
+    email = forms.CharField(max_length=32, required=False
         widget=forms.TextInput(attrs={'placeholder': "Email"}), label='')
 
     avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
