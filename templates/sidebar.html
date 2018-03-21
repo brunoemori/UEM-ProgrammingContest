@@ -44,18 +44,11 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/problems">Problems</a>
           </li>
-          <!--
-
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-          </li>
-          -->
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/prefs">Preferences</a>
+            </li>
+          {% endif %}
           <li class="nav-item">
             {% if user.is_authenticated %}
               <a class="nav-link" href="/home/logout">Log out</a>
