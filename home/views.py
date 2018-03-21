@@ -9,7 +9,9 @@ def home(request):
     return render(request, 'home/home.html', {"user": request.user})
 
 def logout_view(request):
-    request.user.isUserOnline = False
-    request.user.save()
-    logout(request)
-    return redirect('/login')
+    if (request.user.is_authenticated):
+        request.user.isUserOnline = False
+        request.user.save()
+        logout(request)
+
+    return redirect('/home')
