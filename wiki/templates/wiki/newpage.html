@@ -7,12 +7,21 @@
   </head>
 
   <body>
-    <title> UEM-PC Wiki New Article </title>
+    {% if isEditing %}
+      <title> UEM-PC Wiki Edit Article </title>
+    {% elif isDeleting %}
+      <title> UEM-PC Wiki Delete Article </title>
+    {% else %}
+      <title> UEM-PC Wiki New Article </title>
+    {% endif %}
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
         <div class="my-auto">
           {% if isEditing %}
-           <h2 class="mb-5"> Edit article: {{form.problemNumber.value}} </h2>
+            <h2 class="mb-5"> Edit article: {{form.problemNumber.value}} </h2>
+          {% elif isDeleting %}
+            <h2 class="mb-5"> Delete article: {{form.problemNumber.value}} </h2>
+            <h5> Are you sure you want to delete this article ? </h5>
           {% else %}
             <h2 class="mb-5"> Create new article </h2>
           {% endif %}
@@ -30,14 +39,6 @@
                   <a href="/wiki/{{ form.problemNumber.value }}">
                     <strong> {{ error|escape }} </strong>
                   </a>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
-              {% if messages %}
-                <div class="alert alert-success mt-4">
-                {% for msg in messages %}
-                  <strong> {{ msg }} </strong>
                   {% endfor %}
                 </div>
               {% endif %}
@@ -67,11 +68,18 @@
               
               {% if isEditing %}
                 <button type="submit" class="mt-4"> Edit </button>
+              {% elif isDeleting %}
+                <button type="submit" class="btn btn-danger mt-4"> Delete </button>
               {% else %}
                 <button type="submit" class="mt-4"> Create </button>
               {% endif %}
-
             </form>
+              {% if isDeleting or isEditing%}
+                <a href="/wiki/{{form.problemNumber.value}}">
+                  <button type="button" class="btn btn-secondary mt-4"> Cancel </button>
+                </a>
+              {% endif %}
+
           </div>
         </div>
 
