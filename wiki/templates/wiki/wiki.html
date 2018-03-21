@@ -29,13 +29,11 @@
 
         <div class="card mb-4">
           <div class=card-body>
-            <div class="card">
-              <div class="card-block my-2">
-                <h4 class="mb-0 ml-2"> Description </h4>
-              </div>
-              <div class="card-text mx-4 mb-4">
-                {{ article.body|linebreaks }}
-              </div>
+            <div class="card-block my-2">
+              <h4 class="mb-0 ml-2"> Description </h4>
+            </div>
+            <div class="card-text mx-4 mb-4">
+              {{ article.body|linebreaks }}
             </div>
           </div>
         </div>
@@ -43,26 +41,22 @@
         <div class="card-deck mb-4">
           <div class="card">
             <div class=card-body>
-              <div class="card mx-0">
-                <div class="card-block my-2">
-                  <h4 class="mb-0 ml-2"> Inputs </h4>
-                </div>
-                <div class="card-text mx-4 mb-4">
-                  {{ article.inputs }}
-                </div>
+              <div class="card-block my-2">
+                <h4 class="mb-0 ml-2"> Inputs </h4>
+              </div>
+              <div class="card-text mx-4 mb-4">
+                {{ article.inputs|linebreaks }}
               </div>
             </div>
           </div>
 
           <div class="card">
             <div class=card-body>
-              <div class="card mx-0">
-                <div class="card-block my-2">
-                  <h4 class="mb-0 ml-2"> Outputs </h4>
-                </div>
-                <div class="card-text mx-4 mb-4">
-                  {{ article.outputs }}
-                </div>
+              <div class="card-block my-2">
+                <h4 class="mb-0 ml-2"> Outputs </h4>
+              </div>
+              <div class="card-text mx-4 mb-4">
+                {{ article.outputs|linebreaks }}
               </div>
             </div>
           </div>
