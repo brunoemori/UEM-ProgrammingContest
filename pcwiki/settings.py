@@ -38,6 +38,8 @@ LOGIN_URL = '/login/'
 
 # Application definition
 
+ADMIN_ENABLED = False
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
