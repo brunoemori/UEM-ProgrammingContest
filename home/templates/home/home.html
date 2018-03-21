@@ -2,36 +2,37 @@
 {% include "sidebar.html" %}
 <html>
 <body id="page-top">
+  <title> UEM-PC Home </title>
   <div class="container-fluid p-0">
     <section class="resume-section p-5 d-flex" id="home">
       <div class="my-auto">
         <h1 class="mb-0">{{user.firstName}} {{user.lastName}} </h1>
+        {% if user.is_authenticated %}
+          {% if user.isUserOnline %}  
+            <span class="badge badge-success"> <h4 class="my-0" style="color:#e5e5e5">Online</h4></span>
 
-        {% if user.isUserOnline %}
-        <span class="badge badge-success"> <h4 class="my-0" style="color:#e5e5e5">Online</h4></span>
+          {% else %}
+            <span class="badge badge-danger"> <h4 class="my-0" style="color:#e5e5e5">Offline</h4></span>
 
-        {% else %}
-        <span class="badge badge-danger"> <h4 class="my-0" style="color:#e5e5e5">Offline</h4></span>
+          {% endif %}
 
-        {% endif %}
+          {% if user.isStaff %}
+            <span class="badge badge-secondary"> <h4 class="my-0" style="color:#e5e5e5">Staff</h4></span>
+          {% endif %}
 
-        {% if user.isStaff %}
-        <span class="badge badge-secondary"> <h4 class="my-0" style="color:#e5e5e5">Staff</h4></span>
-        {% endif %}
+          <div class="subheading"> 
+            {{user.email}}
+          </div> 
 
-        <div class="subheading"> 
-          {{user.email}}
-        </div> 
+          <p class="mb-5"> Joined {{user.dateJoined|date:"d/m/Y"}}
 
-        <p class="mb-5"> Joined {{user.dateJoined|date:"d/m/Y"}}
+          <div class="card card-primary mb-5 d-inline-flex">
 
-        <div class="card card-primary mb-5 d-inline-flex">
-
-        {% if user.bio %}
-          <div class="card-block">
-            <p class="card-text mx-4 my-2"> {{ user.bio }} </p>
-          </div>
-        {% endif %}
+          {% if user.bio %}
+            <div class="card-block">
+              <p class="card-text mx-4 my-2"> {{ user.bio }} </p>
+            </div>
+          {% endif %}
         </div>
 
         <ul class="list-inline list-social-icons mb-0">
@@ -70,6 +71,11 @@
         </ul>
       </div>
     </section>
+
+    {% else %} <!-- If user is not authenticated --> 
+      <h1> Hello, visitor! </h1>
+    {% endif %}
+
 
     <!--
     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">

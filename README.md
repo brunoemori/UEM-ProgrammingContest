@@ -1,7 +1,8 @@
 # UEM-ProgrammingContest
 
-# Programming_Contest_Wiki
-
-## Templates
+## Templates and other stuffs used
+- Django Framework (Python3) https://github.com/django/django
 - FlatLogin Form by Andy Tran https://codepen.io/andytran/pen/PwoQgO
 - BootStrap Resume Theme https://startbootstrap.com/template-overviews/resume/
+- insertTab JS function https://pallieter.org/Projects/insertTab/
+- CodeMirror https://codemirror.net/

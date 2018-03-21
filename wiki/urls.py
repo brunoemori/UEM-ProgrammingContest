@@ -5,4 +5,7 @@ from . import views
 
 urlpatterns = [
     url(r'^(\d+)$', views.getPage),
+    url(r'^newpage$', views.newPage),
+    url(r'^edit/(\d+)$', views.editPage),
+    url(r'^delete/(\d+)$', views.deletePage)
 ]

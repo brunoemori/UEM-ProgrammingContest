@@ -3,42 +3,61 @@
 
 <html>
   <body>
+    <title> UEM-PC Problems </title>
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
         <div class="my-auto">
           <h2 class="mb-5"> Problems </h2>
         </div>
+
+        {% if messages %}      
+          <div class="alert alert-success mt-4">
+            {% for msg in messages %}
+              <strong> {{ msg }} </strong>
+            {% endfor %}       
+          </div>               
+        {% endif %}            
         
         <div class="card-deck">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title"> Your articles </h4>
-              {% if ownArticles %}
-                {% for article in ownArticles %}
-                <div class="card card-primary my-4">
-                  <div class="card-block my-2">
-                    <h4 class="mb-0">
-                      <a class="card-text mx-4" href="/wiki/{{article.problemNumber}}"> 
-                        {{ article.problemNumber }} - {{article.title}}
-                      </a>
-                    </h4>
-                    <p class="muted-text mx-4"> {{ article.date|date:"d/m/Y" }} </p>
+              {% if user.is_authenticated %}
+                {% if ownArticles %}
+                  {% for article in ownArticles %}
+                  <div class="card card-primary my-4">
+                    <div class="card-block my-2">
+                      <h4 class="mb-0">
+                        <a class="card-text mx-4" href="/wiki/{{article.problemNumber}}"> 
+                          {{ article.problemNumber }} - {{article.title}}
+                        </a>
+                      </h4>
+                      <p class="muted-text mx-4"> {{ article.date|date:"d/m/Y" }} </p>
+                    </div>
                   </div>
-                </div>
-                {% endfor %}
-              {% else %}
-              <div>
-                <p class="muted-text"> You don't have any articles. </p>
-              </div>
+                  {% endfor %}
+                {% else %}
+                  <div>
+                    <p class="muted-text"> You don't have any articles. </p>
+                  </div>
+                {% endif %}
+                {% else %} <!-- If user is not authenticated -->
+                  <div>
+                    <p class="muted-text"> You must be logged in to create articles. </p>
+                  </div>
+                {% endif %} 
+            </div>
+            {% if user.is_authenticated %}
+              <div class="card-footer my-0" style="background-color:#ffffff">
+                <a href="/wiki/newpage">
+                  <button type="button" class="btn button-secondary mr-4"> New </button>
+                </a>
 
-              {% endif %}
-            </div>
-            <div class="card-footer my-0" style="background-color:#ffffff">
-              <button type="button" class="btn button-secondary mr-4"> New </button>
-              <a href="/problems/yourarticles">
-                <button type="button" class="btn button-secondary"> List </button>
-              </a>
-            </div>
+                <a href="/problems/yourarticles">
+                  <button type="button" class="btn button-secondary"> List </button>
+                </a>
+              </div>
+            {% endif %}
           </div>
 
           <div class="card">

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <head>  
+    <link rel="stylesheet" href="/static/css/codemirror.css">
+  </head>
+
+  <body>
+    {% if isEditing %}
+      <title> UEM-PC Wiki Edit Article </title>
+    {% elif isDeleting %}
+      <title> UEM-PC Wiki Delete Article </title>
+    {% else %}
+      <title> UEM-PC Wiki New Article </title>
+    {% endif %}
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          {% if isEditing %}
+            <h2 class="mb-5"> Edit article: {{form.problemNumber.value}} </h2>
+          {% elif isDeleting %}
+            <h2 class="mb-5"> Delete article: {{form.problemNumber.value}} </h2>
+            <h5> Are you sure you want to delete this article ? </h5>
+          {% else %}
+            <h2 class="mb-5"> Create new article </h2>
+          {% endif %}
+        </div>
+
+        <div class="module form-module" style="max-width:none;">
+          <div></div>
+          <div class="form">
+            <form method="post">
+              {% csrf_token %}
+              
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger mt-4">
+                {% for error in form.non_field_errors %}
+                  <a href="/wiki/{{ form.problemNumber.value }}">
+                    <strong> {{ error|escape }} </strong>
+                  </a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              
+              {% if not isEditing%}
+                {{ form.problemNumber }}
+              {% else %}
+              <input type="text" name="problemNumber" value="{{form.problemNumber.value}}" required id="id_problemNumber" placeholder="Problem number" readonly/>
+              {% endif %}
+              {{ form.title }}
+              {{ form.body }}
+              
+              <div class="card-deck mb-4">
+                <div class="card">
+                  {{ form.inputs }}
+                </div>
+                <div class="card">
+                  {{ form.outputs }}
+                </div>
+              </div>
+              
+              <div class="card-block my-2">  
+                <h4 class="mb-0 ml-2"> Code </h4>
+              </div>
+              
+              {{ form.bodyCode }}
+              
+              {% if isEditing %}
+                <button type="submit" class="mt-4"> Edit </button>
+              {% elif isDeleting %}
+                <button type="submit" class="btn btn-danger mt-4"> Delete </button>
+              {% else %}
+                <button type="submit" class="mt-4"> Create </button>
+              {% endif %}
+            </form>
+              {% if isDeleting or isEditing%}
+                <a href="/wiki/{{form.problemNumber.value}}">
+                  <button type="button" class="btn btn-secondary mt-4"> Cancel </button>
+                </a>
+              {% endif %}
+
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <script src="/static/js/tab.js"></script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/js/codemirror.js"></script>
+    <script src="/static/js/input.js"></script>
+
+    <!-- Modes -->
+    <script src="/static/mode/clike/clike.js"></script>
+
+  </body>
+</html>
+
