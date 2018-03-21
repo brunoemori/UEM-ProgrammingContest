@@ -36,7 +36,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     lastName = models.CharField(max_length=64, blank=False)
     username = models.CharField(max_length=32, unique=True)
     bio = models.CharField(max_length=128, blank=True)
-    email = models.EmailField(max_length=128)
+    email = models.EmailField(max_length=128, default='')
     isUserOnline = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     numArticles = models.PositiveIntegerField(default=0)
