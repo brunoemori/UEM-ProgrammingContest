@@ -48,11 +48,14 @@
                 {% endif %} 
             </div>
             {% if user.is_authenticated %}
-              <div class="card-footer my-0" style="background-color:#ffffff">
-                <a href="/wiki/newpage">
-                  <button type="button" class="btn button-secondary mr-4"> New </button>
-                </a>
-
+                <div class="card-footer my-0" style="background-color:#ffffff">
+                {% if user.is_staff %}
+                  <a href="/wiki/newpage">
+                    <button type="button" class="btn button-secondary mr-4"> New </button>
+                  </a>
+                {% else %}
+                  <button type="button" class="btn button-secondary mr-4" disabled title="Only staff members can create articles" > New </button>
+                {% endif %}
                 <a href="/problems/yourarticles">
                   <button type="button" class="btn button-secondary"> List </button>
                 </a>
