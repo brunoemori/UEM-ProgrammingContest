@@ -21,6 +21,9 @@ def getPage(request, articleUrl):
 
 @login_required()
 def newPage(request):
+    if (not request.user.is_staff):
+        return redirect('/home')
+
     if (request.method == 'POST'):
         form = ArticleForm(request.POST)
         if (form.is_valid()):
@@ -40,7 +43,11 @@ def newPage(request):
 
 @login_required
 def editPage(request, articleUrl):
-    article = Article.objects.get(problemNumber=articleUrl)
+    try:
+        article = Article.objects.get(problemNumber=articleUrl)
+
+    except Article.DoesNotExist:
+        return HttpResponse('<h5> This page does not exist. </h5>')
 
     if (article.authorID.id != request.user.id):
         return redirect('/home')
@@ -60,7 +67,11 @@ def editPage(request, articleUrl):
 
 @login_required()
 def deletePage(request, articleUrl):
-    article = Article.objects.get(problemNumber=articleUrl)
+    try:
+        article = Article.objects.get(problemNumber=articleUrl)
+
+    except Article.DoesNotExist:
+        return HttpResponse('<h5> This page does not exist. </h5>')
 
     if (article.authorID.id != request.user.id):
         return redirect('/home')
