@@ -30,27 +30,48 @@ def newPage(request):
 
             article.save()
             messages.success(request, 'Article ' + str(article.problemNumber) + ' created successfully!')
+            return redirect('/wiki/' + str(article.problemNumber))
                 
     else:
         form = ArticleForm()
     
     print(form.errors)
-    return render(request, 'wiki/newpage.html', {"form": form, 'isEditing': False})
+    return render(request, 'wiki/newpage.html', {"form": form})
 
 @login_required
 def editPage(request, articleUrl):
     article = Article.objects.get(problemNumber=articleUrl)
-    form = ArticleForm(request.POST, instance=article)
 
     if (article.authorID.id != request.user.id):
         return redirect('/home')
+
+    form = ArticleForm(request.POST, instance=article)
 
     if (request.method == 'POST'):
         if (form.is_valid()):
             form.save()
             messages.success(request, 'Article ' + str(article.problemNumber) + ' updated!')
+            return redirect('/wiki/' + str(article.problemNumber))
+        
     else:
         form = ArticleForm(instance=article)
 
     return render(request, 'wiki/newpage.html', {'form': form, 'user': request.user, 'isEditing': True})
 
+@login_required()
+def deletePage(request, articleUrl):
+    article = Article.objects.get(problemNumber=articleUrl)
+
+    if (article.authorID.id != request.user.id):
+        return redirect('/home')
+
+    if (request.method == 'POST'):
+        print("Here")
+        form = ArticleForm(request.POST, instance=article)
+        article.delete()
+        messages.success(request, 'Article' + str(article.problemNumber) + ' successfully deleted!')
+        return redirect('/problems')
+    else:
+        form = ArticleForm(instance=article)
+
+    return render(request, 'wiki/newpage.html', {'form': form, 'user': request.user, 'isDeleting': True})
