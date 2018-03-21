@@ -19,6 +19,14 @@
           </p>
         </div>
 
+        {% if messages %}   
+		      <div class="alert alert-success mt-4">
+            {% for msg in messages %}
+              <strong> {{ msg }} </strong>
+            {% endfor %}
+          </div>
+        {% endif %}
+
         <div class="card mb-4">
           <div class=card-body>
             <div class="card">
@@ -26,7 +34,7 @@
                 <h4 class="mb-0 ml-2"> Description </h4>
               </div>
               <div class="card-text mx-4 mb-4">
-                {{ article.body }}
+                {{ article.body|linebreaks }}
               </div>
             </div>
           </div>
@@ -75,7 +83,10 @@
           {% if user.username == article.authorID.username %}
             <div class="card-footer my-0">
               <a href="/wiki/edit/{{article.problemNumber}}">
-                <button type="button" class="btn button-secondary mr-4"> Edit </button>
+                <button type="button" class="btn btn-secondary mr-4"> Edit </button>
+              </a>
+              <a href="/wiki/delete/{{article.problemNumber}}">
+                <button type="button" class="btn btn-danger mr-4"> Delete </button>
               </a>
             </div>
           {% endif %}
