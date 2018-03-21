@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import django_heroku
 from .configs import getConfig
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -132,3 +133,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')]
+
+django_heroku.settings(locals())
