@@ -38,9 +38,6 @@ class SignUpForm(UserCreationForm):
         if (CustomUser.objects.all().filter(username=cleanedData.get('username'))):
             raise forms.ValidationError('Username already in use.')
 
-        if (CustomUser.objects.all().filter(email=cleanedData.get('email'))):
-            raise forms.ValidationError('Email already in use.')
-
         if (cleanedData.get('password1') != cleanedData.get('password2')):
             raise forms.ValidationError('Passwords don\'t match')
 
