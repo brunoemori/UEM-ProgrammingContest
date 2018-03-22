@@ -8,24 +8,24 @@
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
         <div class="my-auto">
-          <h2 class="mb-5"> Your preferences</h2>
+          <h2 class="mb-5 mx-4"> Your preferences</h2>
         </div>
 
         {% if messages %}
           {% for msg in messages %}
             {% if msg.tags == "error" %}
-            <div class="alert alert-danger mt-4">
+            <div class="alert alert-danger mt-4 mx-4">
               <strong> {{ msg }} </strong>
             </div>
             {% else %}
-            <div class="alert alert-success mt-4">
+            <div class="alert alert-success mt-4 mx-4">
               <strong> {{ msg }} </strong>
             </div>
             {% endif %}
           {% endfor %}
         {% endif %}
 
-        <div class="module form-module" style="max-width:none;"> 
+        <div class="module form-module mx-4" style="max-width:none;"> 
           <div></div>
           <div class=form>
             <form method="post" enctype="multipart/form-data">
