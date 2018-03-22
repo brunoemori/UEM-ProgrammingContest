@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/codemirror.css">
+  </head>
+  <body>
+    <title> Guide #1 - Basics of C programming language </title>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2> Guide #1 - Basics of C programming language </h2>
+        </div>
+
+        <div style="text-align:justify;">
+          Neste "curso", iremos focar nossos estudos na linguagem de programação C e C++, utilizando um SO baseado em Linux. Claro, você pode escolher a linguagem que você preferir! Se estiver utilizando Windows, <strike> desintale-o e instale o Ubuntu </strike>, sugiro que utilize uma IDE para programar, como o CodeBlocks, por exemplo.<br> 
+        <div class="mt-4"> </div>
+        <h4 class="mb-0"> Mas por que a linguagem C ?? Python não é mais fácil ??? </h4>
+        <br> Sim! Python é muito mais fácil de se programar, se formos comparar com a linguagem C, devido a sua sintaxe simples, possui inúmeras bibliotecas com funções já prontas (este site, inclusive, foi escrito em Python3). Mas, mesmo assim, quando se aprende a programar em Python, a facilidade da linguagem acaba fazendo o "complicado" para você, que, por fim, acaba não aprendendo nada de programação. A linguagem C, por sua vez, embora seja mais difícil, vai te ensinar os princípios fundamentais da programação. Com tal conhecimento (de lógica de programação), você vai aprender com muito mais facilidade qualquer outra linguagem de programação, inclusive Python! Legal, né !? <br>
+        Então bora aprender C!!
+        <div class="mt-4"></div>
+        Primeiramente, todo código em C deve ser um arquivo com extensão .c (por exemplo, programa.c). Abaixo, o corpo padrão de um código em C:
+        <textarea class="codemirror-textarea">#include <stdio.h>
+  int main() {
+    //Seu código
+    return 0;
+  }
+        </textarea>
+
+        <h4 class="mt-4 mb-0"> NOSSA O QUE É ISSO ??</h4>
+        Isso, é um programa escrito em linguagem C. Neste caso, ele não faz nada. <br>
+        Vamos começar: Na linha 1, está o cabeçalho do programa. <i>#include</i> está indicando para que o programa inclua em seu código a biblioteca <i>stdio.h</i>. Ou seja, estamos importando funções presentes nesta bibioteca para o seu programa. a <i> main() </i> como o nome diz, é a função principal do seu programa, ou seja, a primeira função executada quando seu programa for executado. <i> return 0; </i> indica o fim da sua função principal. Ou seja, quando esta linha for executada, sua função principal acaba.
+
+        <h4 class="mt-4 mb-0"> Que funções são essas ?</h4>
+        Nesta biblioteca, estão as funções básicas e padrões de entrada e saída. Entrada é entrada de dados do seu programa, ou seja, os dados que você (ou qualquer outro usuário) vai fornecer para o programa processar. Ao contrário, saída é a sáida de dados do seu programa, ou seja, o resultado dos dados que seu programa processou. Essas funções são: <i> printf </i> para saída e <i> scanf </i> para entrada:
+         <textarea class="codemirror-textarea">#include <stdio.h>
+  int main() {
+    printf("Hello, world!\n");
+    return 0;
+  }
+        </textarea>
+        <div class="mt-4"><div>
+        Neste caso, estamos ordenando nosso programa a "printar" (mostrar na tela) a frase "Hello, world!". O "\n" indica uma quebra de linha, ou seja, pular uma linha.
+        <br>
+        Tente você! Na sua área de trabalho, crie um arquivo com a extensão .c e escreva o código acima! Caso você esteja usando Ubuntu, abra o terminal (comando: <i>CTRL+ALT+T</i>) e vá até o do arquivo (neste caso, na área de trabalho. Utilize o comando cd para navegar por suas pastas). Caso esteja na área de trabalho, o comando é: <i>cd ~/Área\ de\ Trabalho</i>, ou <i>cd ~/Desktop</i>. Se estiver utilizando alguma IDE no Windows, isso provavelmente não será necessário. Ok! agora, no mesmo terminal, execute o comando: <i> gcc nome_do_seu_arquivo.c </i>. No Windows, procure alguma opção de "compilar" em sua IDE. Se você seguiu os passos corretamente até aqui, não aparecerá nenhum erro. 
+        <h4 class="mt-4 mb-0"> Ahn ? O que aconteceu ?</h4>
+        Você compilou seu código. O compilador é, (bem) resumidamente, um programa que lê o seu código em uma determinada linguagem de programação (conhecido como código fonte) e o transforma em um outro código no qual seu computador consiga entender. Podemos dizer que é um tradutor da linguagem do seu código para uma linguagem de máquina! 
+        <h4 class="mt-4 mb-0"> Compilou. E agora ?</h4>
+        Agora, se o processo de compilação ocorrer sem erros, você pode executá-lo! Basta abrir o terminal e executar o comando <i> ./a.out </i>, simples assim! Após executar, o que aparece logo em seguida no seu terminal ? Hello, world! ?
+        <h4 class="mt-4 mb-0"> Vimos a função printf. Ok. Mas e a função scanf ?</h4>
+        Antes de falarmos sobre a função scanf, precisamos abordar um outro tema importante: tipos de dados e variáveis. Tipos de dados são meios que você indica para o seu programa qual será o formato dos seus dados. Será um número inteiro ? uma letra ? um número real ? <br>
+        São, basicamente, estes os tipos de dados mais comuns: <i> int, char, float e double. </i> <i> int </i> é o tipo de números inteiros, ou seja, um dado do tipo inteiro trabalha apenas com números inteiros (-3, -2, -1, 0, 1, 2, ...). O tipo <i> char </i> indica que o dado é um caracter, ou, no geral, uma letra. Mas nem sempre será uma letra (pesquise sobre tabela ASCII). O tipo <i> float </i> também trabalha com números, neste caso, números reais (com casas decimais). Assim, eu posso representar um número inteiro em um <i> float </i>, mas esse dado continua sendo do tipo <i> float </i>!! Por fim, o tipo <i> double </i> é a mesma coisa que um <i> float </i>, porém, possui uma precisão maior (alcança um maior número de casas decimais).
+        <h4 class="mt-4 mb-0"> Entendi. Agora a função scanf ? </h4>
+        Sim, mas vamos voltar a falar sobre a <i> printf </i>. Quando utilizamos a função <i> scanf </i>, estamos querendo ler um dado na entrada do programa. Logo, precisamos de um local para armazenar este valor, certo ? Este lugar é a memória principal do computador (memória RAM). Mas, em termos de programação, utilizamos as <strong> variáveis </strong>. As variáveis são nomes que armazenam dados de determinados tipos. Assim, para armazenar a entrada em uma variável, utilizamos a função <i> scanf </i>. Observe o código abaixo:
+         <textarea class="codemirror-textarea">#include <stdio.h>
+  int main() {
+    int A;
+    scanf("%i", &A);
+    printf("Valor de A = %i\n", A);
+    return 0;
+  }
+        </textarea>
+        Neste código, estou armazenando o valor da entrada do programa em A e, em seguida, mostrando este valor na tela. 
+        <h4 class="mt-4 mb-0"> Não entendi </h4>
+        
+        Eu explico. A primeira linha é uma declaração de variável. Ou seja, estamos definindo uma variável do tipo inteiro com o nome A. <i> scanf </i> é uma função, podemos perceber pelos parênteses logo a sua frente. Dentro dos parênteses, temos os chamados argumentos. Pense como se fosse valores que são passados para esta função, como se fosse uma entrada. Seu primeiro argumento é "%i". Isso é um especificador de formato. Ou seja, o tipo de dado esperado para esta função. Neste caso, do tipo inteiro. Como queremos ler um valor da entrada e armazená-lo em A, e a variável A é do tipo inteiro, é este especificador que deve ser utilizado. O segundo argumento da função é &A. Isso representa o endereço da memória relativo à variável A. Lembre-se que dados são armazenados em memória. As variáveis servem para identificar onde está a posição de memória que será utilizada. Por fim, a linha 4 instrui para o programa o seguinte: leia o valor de entrada (é esperado que este valor seja um inteiro) e armazene este valor no endereço de memória da variável A.
+        <h4 class="mt-4 mb-0"> A função printf está diferente </h4>
+        Sim, pois não queremos mais mostrar na tela "Hello, world!". Agora, queremos mostrar na tela o resultado de A. Como A é uma variável, a função <i> printf </i> muda um pouco, o primeiro argumento da função é "A = %i". Observe que também há um especificador de formato inteiro. Assim como ocorre na função <i> scanf </i>, a função <i> printf </i> também precisa saber o tipo de dado que será mostrado. Como A é uma variável do tipo inteiro, utilizamos "%i". A diferença é que, na hoje de "printar", este especificador será substituído pelo valor que queremos mostrar. O segundo argumento é justamente isso: o que substituirá o "%i" na função <i> printf </i>. Neste caso, a variável A. <br>
+        Sua vez! Da mesma forma que você escreveu, compilou e executou seu primeiro código, faça o mesmo com esse e veja os resultados! Ao executar o programa, digite 2 e tecle <i> Enter </i>. O que acontece ? (Note que, ao executar a função <i> scanf </i> seu programa ficará esperando o valor da entrada ser inserido). Agora, analise o código abaixo:
+        </div>
+         <textarea class="codemirror-textarea">#include <stdio.h>
+  int main() {
+    int A, B;
+    scanf("%i %i", &A, &B);
+    int C = A + B;
+    printf("Valor de A + B = %i\n", C);
+    return 0;
+  }
+        </textarea>
+        Podemos declarar várias variáveis do mesmo tipo, separando os nomes por vírgula. A função <i> scanf </i> também pode ler várias variáveis em apenas uma chamada, separando os especificadores por espaço, e os endereços das variáveis por vírgulas. Operações entre variáveis também ocorrem, sendo + (soma), - (subtração), * (multiplicação), / (divisão), os operadores matemáticos. No caso acima, estou armazendo o valor da soma das variáveis A e B em uma outra variável do tipo inteiro, chamada C. <br>
+        <strong> OBSERVAÇÃO IMPORTANTE </strong>: observe que algumas linhas acabam com um ; (ponto e vírgula). Caso esqueça de uma, o compilador não vai entender o código e dará erro!
+ 
+        <h4 class="mt-4 mb-0"> Muito legal!! E agora ? </h4>
+        Agora, vamos ver se você realmente entendeu. No URI Online Judge, resolva os problemas de inicante (1001, 1002, etc).
+
+        <div class="mt-5" style="display:flex; justify-content: space-between;">
+          <div align="left">
+            <a href="/guides/n1"> 
+              <button type="button" class="btn btn-secondary"> Anterior </button>
+            </a>
+          </div>
+
+          <div align="right">
+            <a href="/guides/n3"> 
+              <button type="button" class="btn btn-secondary"> Próximo </button>
+            </a>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/js/codemirror.js"></script>
+    <script src="/static/js/text-area-guides.js"></script>
+
+    <script src="/static/mode/clike/clike.js"></script>
+  </body>
+</html>

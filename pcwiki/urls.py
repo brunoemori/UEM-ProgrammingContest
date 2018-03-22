@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^home/', include('home.urls')),
     url(r'^problems/', include('problems.urls')),
     url(r'^prefs/', include('preferences.urls')),
+    url(r'^guides/', include('guides.urls')),
     url(r'^$', RedirectView.as_view(url='home/', permanent=False))
 ]
 

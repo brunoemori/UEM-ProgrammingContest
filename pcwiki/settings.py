@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'login',
     'wiki',
     'home',
-    'problems'
+    'problems',
+    'guides'
 ]
 
 AUTH_USER_MODEL = "signup.CustomUser"
