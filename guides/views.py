@@ -8,3 +8,6 @@ def n1(request):
 
 def n2(request):
     return render(request, 'guides/n2.html')
+
+def n3(request):
+    return render(request, 'guides/n3.html')
