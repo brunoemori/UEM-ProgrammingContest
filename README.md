@@ -6,3 +6,4 @@
 - BootStrap Resume Theme https://startbootstrap.com/template-overviews/resume/
 - insertTab JS function https://pallieter.org/Projects/insertTab/
 - CodeMirror https://codemirror.net/
+- Google Prettify https://github.com/google/code-prettify
