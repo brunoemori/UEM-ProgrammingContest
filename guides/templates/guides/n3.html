@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <style> 
+    .prettyprint ol.linenums > li { list-style-type: decimal };
+  </style>
+
+  <body>
+    <title> Guide #2 - Conditionals: controlling the execution of your program </title>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mx-4"> Guide #2 - Conditionals: controlling the execution of your program </h2>
+        </div>
+
+        <div style="text-align:justify;" class="mx-4 my-2">
+          Legal, aprendemos as funções básicas de entrada e saída da linguagem C. Agora, veremos sobre como controlar o fluxo de execução do seu programa. Suponha que você precise executar determinadas linhas de código somente se determinadas condições forem cumpridas. Para resolvermos este tipo de situação, precisamos utilizar as estruturas condicionais (<i> if </i>). Observe o código abaixo:
+          <pre class="prettyprint linenums">if (c) {
+  // Código 1
+}
+else {
+  //Código 2
+}
+//Resto do código
+          </pre>
+          <h4 class="mb-0"> O que é isso ? </h4>
+          Isso é o uso básico de um <i> if </i>. Quando seu programa em algum momento executar a linha 1, ele verificará a condição "c" dentro dos parênteses. Caso seja verdadeira, todo o corpo do <i> if </i> será executado (Código 1), e o código dentro do corpo do <i> else </i> (Código 2) será ignorado. Caso a condição não seja verdadeira, o corpo do <i> if </i> será ignorado, e o <i> else </i> será executado desta vez. Note que o uso de <i> else </i> é opcional, ou seja, podemos usar um <i> if </i> sem um <i> else </i>:
+          <pre class="prettyprint linenums">if (c) {
+  // Código 1
+}
+//Resto do código
+          </pre>
+          Neste caso, se a condição for falsa, o corpo do <i> if </i> não será executado e o programa irá continuar seu fluxo de execução normalmente.
+        <h4 class="mb-0 mt-4"> Ok. Mas o que pode ser estas condições ? </h4>
+        Normalmente são expressões lógicas que podem assumir apenas dois valores: Verdadeiro ou Falso (por exemplo: A é igual a B ?, C é maior de D ?, etc). Mas, também são aceitos qualquer tipo de valor numérico. Neste caso, 0 representa o valor Falso, enquanto que qualquer valor diferente disso será tratado como verdadeiro.
+           <pre class="prettyprint linenums">int A = 2, B = 2;
+if (1) {
+  printf("1\n");
+}
+
+if (-1) {
+  printf("2\n");
+}
+
+if ('a') {
+  printf("3\n");
+}
+
+if (A == B) {
+  printf("4\n");
+}
+
+if (0) {
+  printf("Not here\n");
+}
+          </pre>
+          Note que todos os <i> ifs </i> serão verdadeiros, exceto o último, pois, como 0 representa o valor lógico Falso, a condição será falsa e, consequentemente, o corpo deste <i> if </i> não será executado.
+
+        <h4 class="mb-0 mt-4"> O que significa == ? </h4>
+        É um operador comparativo. Neste caso, de igualdade. Assim como os outros comparadores, ele retorna apenas valores lógicos (Verdadeiro ou Falso). No caso de A == B, esta operação será verdadeira caso o valor de A seja igual ao valor de B. Caso contrário, será falso. Outros operadores são:
+        <pre class="prettyprint linenums">if (A == B) {
+  printf("A é igual a B!\n");
+}        
+if (A &gt B) {
+  printf("A é maior que B!\n");
+}
+if (A &lt B) {
+  printf("A é menor que B!\n");
+}
+if (A &gt= B) {
+  printf("A é maior ou igual a B!\n");
+}
+if (A &lt= B) {
+  printf("A é menor ou igual a B!\n");
+}
+if (A != B) {
+  printf("A é diferente de B!\n");
+}
+        </pre>
+        <strong class="mt-0"> OBSERVAÇÃO IMPORTANTE: </strong> A = 2 e A == 2 são operações diferentes!! A primeira é uma atribuição (estamos definindo o valor de A como 2), enquanto que a segunda estamos comparando se o valor de A é igual a 2!
+
+        <br><br>
+        Um breve exemplo: dada um valor inteiro como entrada, mostre se este valor é par ou ímpar. Como faremos isso ? Sabemos que todo número par é divisível por 2. Isso significa que se dividirmos um número par por 2, o resto desta divisão será 0 (lembre-se do operador % da página anterior):
+         <pre class="prettyprint linenums">#include &ltstdio.h&gt
+
+int main() {
+  int A;
+  scanf("%i", &A);
+  if (A % 2 == 0) {
+    printf("%i é um número par!\n", A);
+  }
+  else {
+    printf("%i é um número ímpar!\n", A);
+  }
+  return 0;
+}
+        </pre>       
+        Existem também operadores lógicos && (operador AND), || (operador OR) e ! (operador NOT). Por exemplo:
+          <pre class="prettyprint linenums">if ((A > B) && (A > C)) {
+  //Neste caso, para a condição do if ser verdadeira, AS DUAS condições (A > B) e (A > C) DEVEM ser verdadeiras.
+  //Caso apenas uma delas for verdade, o resultado será falso.
+}
+
+if ((A > B) || (A > C)) {
+  //Neste caso, para a condição do if ser verdadeira, basta uma (ou as duas) das condições (A > B) ou (A > C) ser verdadeira.
+  //Caso ambas forem falsas, a condição do if será igualmente falsa.
+}
+
+if (!A) {
+  //Neste caso, o operador de negação inverte o valor lógico de A.
+  //Se A for falso, então a condição do if é verdadeira. Caso contrário, será falsa.
+}
+          </pre>
+          <strong> DICA: </strong> Sempre separe suas condições por parênteses, como no exemplo acima. Assim, você se perde menos quando houver muitas condições, além de evitar problemas com as ordem de precedência das operações:  <br>
+          (A > B) && (A > D) || (B > D) <br> (A > B) && ((A > D) || ( B > D)) <br> As duas expressões podem retornar valores lógicos diferentes. 
+          <br><br>
+          Com isso, podemos aninhar vários <i> ifs </i> em apenas uma expressão lógica. Segue abaixo um outro exemplo:
+        
+          <pre class="prettyprint linenums">if ((A > B) && (B > C)) {
+// Código
+}
+
+if (A > B) {
+  if (B > C) {
+    // Código
+  }
+}
+          </pre>
+          Neste caso, os dois <i> ifs </i> terão o mesmo comportamento.
+
+        <h4 class="mb-0 mt-4"> Legal! E agora ? </h4>
+        Agora, para treinar o uso de condicionais, faça o exercício 2059 (Par, Ímpar ou Roubo) no URI Online.
+        </div>
+
+        <div class="mt-5" style="display:flex; justify-content: space-between;">
+          <div align="left">   
+            <a href="/guides/n2">
+              <button type="button" class="btn btn-secondary"> Anterior </button>
+            </a>
+          </div>
+        </div>
+
+
+      </section>
+    </div>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>
