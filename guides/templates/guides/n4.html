@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% include "sidebar.html" %}
+
+<html>
+  <style> 
+    .prettyprint ol.linenums > li { list-style-type: decimal };
+  </style>
+
+  <body>
+    <title> Guide #3 - Loops: "For" and "While" statements. </title>
+    <div class="container-fluid p-0">
+      <section class="resume-section p-lg-5 flex-column">
+        <div class="my-auto">
+          <h2 class="mx-4"> Guide #3 - Loops: "For" and "While" statements. </h2>
+        </div>
+
+        <div style="text-align:justify;" class="mx-4 my-2">
+          Ok. A última lição foi sobre estruturas condicionais. Agora, veremos estruturas de repetição (<i> loops </i>). São utilizadas quando existe a necessidade de se executar um mesmo bloco de código diversas vezes. Para isso, usaremos os comandos <i> for </i> e <i> while </i>:
+          <pre class="prettyprint linenums">int i;
+for (i = 0; i &lt 10; i++) {
+  //Código
+}
+
+while (c) {
+  //Código
+}
+          </pre>
+          <h4 class="mb-0"> O que é isso ? </h4>
+          Vamos analisar o primeiro caso. O <i> for </i>, antes de tudo, necessita de uma variável, para controlar o número de repetições desejado. Na maioria das vezes, esta variável será um número inteiro, mas também pode ser outros tipos (como <i> char </i>, por exemplo). Note que dentro dos parênteses do <i> for </i>, há 3 "argumentos". O primeiro é a atribuição inicial da sua variável: qual valor ela terá ao começar este laço de repetição (e está definição ocorre apenas uma vez). O segundo é a condição de continuidade do laço, ou seja, enquanto esta condição for verdadeira, o <i> for </i> continuará executando. Por último (e opcional), é a alteração do estado da sua variável. Neste caso, a variável é incrementada sempre que se chega ao fim do laço. Aliás, <i> i++ </i> é o mesmo que <i> i = i + 1 </i> (ou seja, adicionando 1 ao valor da variável). Portanto, o corpo deste <i> for </i> será executado 10 vezes:
+          <pre class="prettyprint linenums">int i;
+for (i = 0; i &lt 10; i++) {
+  //Primeiramente, o valor de i será 0.
+  //Ao chegar no fim do laço, o valor de i é incrementado (ou seja, i = 1)
+  //Como a condição (i &lt 10) é verdadeira, o laço é executado novamente.
+  //... E, novamente, ao fim do laço, o valor de i é incrementado e passa a ser 2.
+  //Ou seja, quando o valor de i alcançar 10, a condição (10 &lt 10) será falsa.
+  //Quando esta condição for falsa, o laço de repetição termina.
+}
+//Resto do código
+          </pre>
+          A variável <i> i </i> é uma variável igual qualquer outra, e podemos utilizá-la dentro do laço:
+          <pre class="prettyprint linenums">int i;
+for (i = 0; i &lt 10; i++) {
+  printf("O valor de i é: %i\n", i);
+}
+//Resto do código
+          </pre>
+          Podemos alterar a variação de <i> i </i> da maneira que desejarmos:
+          <pre class="prettyprint linenums">int i;
+for (i = 0; i &lt 10; i+=2) {
+  //Neste caso, é adicionado 2 ao valor de i a cada fim de iteração (repetição).
+  //Logo, neste caso, o laço será executado apenas 5 vezes.
+}
+
+for (i = 10; i &gt 0; i--) {
+  //Mesmo esquema, porém i começa com o valor em 10, e vai decrementando até 0.
+  //Executará 10 vezes.
+  //i-- é o mesmo que i = i - 1
+}
+//Resto do código
+          </pre>
+ 
+        <h4 class="mb-0 mt-4"> Entendi. E o while ? </h4>
+        O <i> while </i> funciona de maneira semelhante ao <i> for </i>, sendo utilizado para criar estruturas de repetição. Mas sua sintaxe é mais simples, lembrando uma estrutura condicional (<i> if </i>):
+           <pre class="prettyprint linenums">while (c) {
+  //Código            
+}           
+           </pre>
+           O corpo do <i> while </i> será executado sempre que a condição <i> c </i> for verdadeira. Com isso, podemos implementar uma estrutura que possui um comportamento equivalente ao de um <i> for </i>, porém, utilizando um <i> while </i>:
+           <pre class="prettyprint linenums">int C = 0;
+while (C &lt 10) {
+  //Código  
+  C++;
+}
+
+for (C = 0; C &lt 10; C++) {
+  //Código
+}
+           </pre>
+           Ambos os laços terão o mesmo comportamento.
+        <h4 class="mb-0 mt-4"> Então qual a diferença ? Qual dos dois devo usar ? </h4>
+        Ambos são utilizados para repetir a execução de um pedaço do código. Use o <i> for </i> em situações em que você precise "contar" alguma variável, ou controlar os passos de sua variável de maneira padronizada: por exemplo, se eu utilizar <i> for (i = 0; i &lt= 20; i+=2) </i>, terei todos os valores pares, de 0 até 20 (note que, neste caso, estamos incluindo o 20!). 
+        <pre class="prettyprint linenums">int N, i;
+scanf("%i", &N);
+for (i = 0; i &lt N; i++) {
+  //Código
+  //Neste caso, estamos iterando até um determinado valor definido na entrada.
+}
+        </pre>
+        Use o <i> while </i> quando a variação da sua variável de controle não segue uma "contagem" ou algum tipo de padrão.
+        <br><br>
+        Ainda existem outros dois comandos para auxiliar no controle de seus laços de repetição: <i> break </i> e <i> continue </i>. 
+        <pre class="prettyprint linenums">int i;
+for (i = 0; i &lt 10; i++) {
+  if (i == 5) {
+    break;
+  }
+}
+//Resto do código
+        </pre>
+        O <i> break </i> serve para interromper o laço prematuramente. No exemplo acima, se o valor de <i> i </i> for 5, o condicional será verdadeiro e consequentemente será executado. Ao cair no <i> break </i> o código imediatamente sai do laço (e continua na linha 7), mesmo que a condição (5 &lt 10) seja verdadeira. Portanto, o laço se repetirá 5 vezes (e não 10).
+        <br>
+        O <i> continue </i> serve para ignorar determinados casos no laço:
+        <pre class="prettyprint linenums">int i;
+for (i = 0; i &lt 10; i++) {
+  if (i == 5) {
+    continue;
+  }
+
+  printf("%i\n", i);
+}
+        </pre>
+        No exemplo acima, o laço irá <i> printar </i> na tela 0, 1, 2, 3, 4, 6, 7, 8, 9. Quando o valor de <i> i </i> for 5, o condicional será verdadeiro e executará o <i> continue </i>. Ao invés de terminar o laço (como aconteceria no <i> break </i>), o comando força o laço a ir para sua próxima iteração, ignorando o restante do corpo do <i> for </i> (No exemplo acima, o <i> printf </i> não será executado se o valor de <i> i </i> for 5). Neste caso, o laço se repetirá 10 vezes normalmente (mesmo que apareça apenas 9 números).
+
+       <h4 class="mb-0 mt-4"> Legal! E agora ? </h4>
+        Agora, para treinar o uso de estruturas de repetição, faça o exercício 1170 (Blobs) no URI Online.
+
+        <div class="mt-5" style="display:flex; justify-content: space-between;">
+          <div align="left">   
+            <a href="/guides/n3">
+              <button type="button" class="btn btn-secondary"> Anterior </button>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      </section>
+    </div>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>
