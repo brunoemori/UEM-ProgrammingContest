@@ -11,3 +11,6 @@ def n2(request):
 
 def n3(request):
     return render(request, 'guides/n3.html')
+
+def n4(request):
+    return render(request, 'guides/n4.html')
