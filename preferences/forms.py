@@ -11,9 +11,9 @@ class UserPrefsForm(forms.ModelForm):
     email = forms.CharField(max_length=32, required=False,
              widget=forms.TextInput(attrs={'placeholder': "Email"}), label='')
      
-    avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
+    #avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
 
-    useDefaultAvatar = forms.BooleanField(required=False, help_text='Use default profile image.')
+    #useDefaultAvatar = forms.BooleanField(required=False, help_text='Use default profile image.')
 
     password1 = forms.CharField(max_length=16, required=False,
         widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
@@ -26,7 +26,8 @@ class UserPrefsForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('firstName', 'lastName', 'email', 'password1', 'password2', 'bio', 'avatar', 'useDefaultAvatar', )
+        #fields = ('firstName', 'lastName', 'email', 'password1', 'password2', 'bio', 'avatar', 'useDefaultAvatar', )
+        fields = ('firstName', 'lastName', 'email', 'password1', 'password2', 'bio',)
 
     def clean(self):
         cleanedData = self.cleaned_data

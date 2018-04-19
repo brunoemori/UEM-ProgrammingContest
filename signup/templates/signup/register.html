@@ -16,7 +16,9 @@
         {{ form.password2 }}
         {{ form.first_name }}
         {{ form.last_name }}
+        <!--
         {{ form.avatar.help_text }} {{ form.avatar }}
+        -->
         {% if form.non_field_errors %}
           {% for msg in form.non_field_errors %}
             <div class="alert alert-danger">

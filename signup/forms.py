@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
     email = forms.CharField(max_length=32, required=False,
         widget=forms.TextInput(attrs={'placeholder': "Email"}), label='')
 
-    avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
+    #avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
     
     password1 = forms.CharField(max_length=16, 
         widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
@@ -25,7 +25,8 @@ class SignUpForm(UserCreationForm):
  
     class Meta:
         model = CustomUser
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'avatar',)
+        #fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'avatar',)
+        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
 
     def clean(self):
         cleanedData = self.cleaned_data
@@ -43,10 +44,12 @@ class SignUpForm(UserCreationForm):
 
         if (len(cleanedData.get('password1')) < 8):
             raise forms.ValidationError('Password must have at least 8 characters')
-
+        
+        '''
         image = cleanedData.get('avatar')
         if (image):
             if (image._size > 2 * 1024 * 1024):
                 raise forms.ValidationError('Image too large (> 2MB).')
+        '''
 
         return cleanedData
