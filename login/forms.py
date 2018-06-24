@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, get_user_model
 User = get_user_model()
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Usuário'}))
+    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Senha'}))
 
     def clean(self, *args, **kwargs):
         usern = self.cleaned_data.get('username')

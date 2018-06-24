@@ -13,7 +13,7 @@
             <div class="card-body">
               {% if not ownArticles %}
                 <div>
-                  <p class="muted-text"> You don't have any articles. </p>
+                  <p class="muted-text"> Você não possui artigos. </p>
                 </div>
               {% else %}
                 {% for article in ownArticles%}
@@ -32,11 +32,11 @@
                 <div class="card pagination text-center">
                   <span class="step-link">
                     {% if ownArticles.has_previous %}
-                      <a href="?page=1" class="mx-4">&laquo; First </a>
-                      <a href="?page={{ ownArticles.previous_page_number }}"> Previous </a>
+                      <a href="?page=1" class="mx-4">&laquo; Primeiro </a>
+                      <a href="?page={{ ownArticles.previous_page_number }}"> Anterior </a>
                     {% else %}
-                      <a class="disabled invisible mx-4">&laquo; First </a>
-                      <a class="disabled invisible"> Previous </a>
+                      <a class="disabled invisible mx-4">&laquo; Primeiro </a>
+                      <a class="disabled invisible"> Anterior </a>
                     {% endif %}
 
                     <span class="current mx-4">
@@ -44,11 +44,11 @@
                     </span>
 
                     {% if ownArticles.has_next %}
-                      <a href="?page={{ ownArticles.next_page_number }}" class="mx-4"> Next </a>
-                      <a href="?page={{ ownArticles.paginator.num_pages }}"> Last &raquo; </a>
+                      <a href="?page={{ ownArticles.next_page_number }}" class="mx-4"> Próximo </a>
+                      <a href="?page={{ ownArticles.paginator.num_pages }}"> Último &raquo; </a>
                     {% else %}
-                      <a class="disables invisible mx-4"> Next </a>
-                      <a class="disabled invisible"> Last &raquo; </a>
+                      <a class="disables invisible mx-4"> Próximo </a>
+                      <a class="disabled invisible"> Último &raquo; </a>
                     {% endif %}
                   </span>
                 </div>
@@ -58,10 +58,10 @@
             <div class="card-footer my-0" style="background-color:#ffffff">
               {% if user.is_staff %}
                 <a href="/wiki/newpage">
-                  <button type="button" class="btn button-secondary mr-4"> New </button>
+                  <button type="button" class="btn button-secondary mr-4"> Novo </button>
                 </a>
               {% else %}
-                <button type="button" class="btn button-secondary mr-4" disabled title="Only staff members can create articles"> New </button>
+                <button type="button" class="btn button-secondary mr-4" disabled title="Você ainda não possui permissão para criar novos artigos."> New </button>
               {% endif %}
             </div>
           </div>

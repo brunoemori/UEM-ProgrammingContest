@@ -24,7 +24,7 @@
               {{user.email}}
             </div> 
 
-            <p class="mb-5"> Joined {{user.dateJoined|date:"d/m/Y"}}
+            <p class="mb-5"> Membro desde {{user.dateJoined|date:"d/m/Y"}}
 
             <div class="card card-primary mb-5 d-inline-flex">
 
@@ -73,7 +73,11 @@
       </section>
 
       {% else %} <!-- If user is not authenticated --> 
-        <h1> Hello, visitor! </h1>
+        <h1> Olá, visitante! </h1>
+        <h4 class="mt-4"> Utilize a barra lareral (superior caso esteja utilizando no celular) para navegar pelo site. </h4>
+        <p> Em "Problemas", você encontrará artigos já criados por usuários sobre problemas de programação, com dicas e soluções </p>
+        <p> Em "Guias", você encontrará tutoriais sobre programção, começando com assuntos básicos para quem quer começar a aprender, a assuntos mais avançados, para usuários mais experientes. </p>
+        <p> Utilize a aba "Login" para acessar sua conta caso tenha uma. </p>
       {% endif %}
 
 

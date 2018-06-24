@@ -7,7 +7,7 @@
     <div class="container-fluid p-0">
       <section class="resume-section p-lg-5 flex-column">
         <div class="my-auto">
-          <h2 class="mb-5 mx-4"> Problems </h2>
+          <h2 class="mb-5 mx-4"> Problemas </h2>
         </div>
 
         {% if messages %}      
@@ -21,7 +21,7 @@
         <div class="card-deck mx-4">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title"> Your articles </h4>
+              <h4 class="card-title"> Seus artigos </h4>
               {% if user.is_authenticated %}
                 {% if ownArticles %}
                   {% for article in ownArticles %}
@@ -38,12 +38,12 @@
                   {% endfor %}
                 {% else %}
                   <div>
-                    <p class="muted-text"> You don't have any articles. </p>
+                    <p class="muted-text"> Você não possui artigos ainda. </p>
                   </div>
                 {% endif %}
                 {% else %} <!-- If user is not authenticated -->
                   <div>
-                    <p class="muted-text"> You must be logged in to create articles. </p>
+                    <p class="muted-text"> Você precisa estar logado para criar novos artigos. </p>
                   </div>
                 {% endif %} 
             </div>
@@ -51,13 +51,13 @@
                 <div class="card-footer my-0" style="background-color:#ffffff">
                 {% if user.is_staff %}
                   <a href="/wiki/newpage">
-                    <button type="button" class="btn button-secondary mr-4"> New </button>
+                    <button type="button" class="btn button-secondary mr-4"> Novo </button>
                   </a>
                 {% else %}
                   <button type="button" class="btn button-secondary mr-4" disabled title="Only staff members can create articles" > New </button>
                 {% endif %}
                 <a href="/problems/yourarticles">
-                  <button type="button" class="btn button-secondary"> List </button>
+                  <button type="button" class="btn button-secondary"> Listar </button>
                 </a>
               </div>
             {% endif %}
@@ -65,7 +65,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title"> Recent articles </h4>
+              <h4 class="card-title"> Arigos recentes </h4>
               {% if otherArticles %}
                 {% for article in otherArticles %}
                   <div class="card card-primary my-4">
@@ -81,7 +81,7 @@
                 {% endfor %}
               {% else %}
                 <div>
-                  <p class="muted-text"> No recent articles found. </p>
+                  <p class="muted-text"> Sem artigos recentes. </p>
                 </div>
               {% endif %}
             </div>
