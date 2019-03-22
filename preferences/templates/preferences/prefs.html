@@ -25,9 +25,9 @@
           {% endfor %}
         {% endif %}
 
-        <div class="module form-module mx-4" style="max-width:none;"> 
+        <div class="module form-module mx-4" style="max-width: 100%;"> 
           <div></div>
-          <div class=form>
+          <div class="form">
             <form method="post" enctype="multipart/form-data">
               {% csrf_token %} 
               {{ form.firstName }}
@@ -36,11 +36,10 @@
               {{ form.bio }}
               {{ form.password1 }}
               {{ form.password2 }}
-              <!--
               {{ form.avatar }}
-              {{ form.useDefaultAvatar }}
-              <p align="center"> {{form.useDefaultAvatar.help_text}} </p>
-              -->
+              <div class="mx-4" align="left" style="max-width: 0; display: inline">
+                {{ form.useDefaultAvatar }}  {{form.useDefaultAvatar.help_text}} 
+              </div>
               <button class="mt-4" type="submit"> Save </button>
             </div>
           </form>

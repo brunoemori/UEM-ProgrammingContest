@@ -11,9 +11,10 @@ class UserPrefsForm(forms.ModelForm):
     email = forms.CharField(max_length=32, required=False,
              widget=forms.TextInput(attrs={'placeholder': "Email"}), label='')
      
-    #avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
+    avatar = forms.ImageField(required=False, help_text='Profile picture (optional)')
 
-    #useDefaultAvatar = forms.BooleanField(required=False, help_text='Use default profile image.')
+    useDefaultAvatar = forms.BooleanField(required=False, help_text='Use default profile image.',
+            widget=forms.CheckboxInput(attrs={'style': 'width:auto; display: inline'}))
 
     password1 = forms.CharField(max_length=16, required=False,
         widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
@@ -26,25 +27,7 @@ class UserPrefsForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        #fields = ('firstName', 'lastName', 'email', 'password1', 'password2', 'bio', 'avatar', 'useDefaultAvatar', )
-        fields = ('firstName', 'lastName', 'email', 'password1', 'password2', 'bio',)
+        fields = ('firstName', 'lastName', 'email', 'password1', 'password2', 'bio', 'avatar', 'useDefaultAvatar', )
 
     def clean(self):
-        cleanedData = self.cleaned_data
-        '''
-        if (cleanedData.get('password1') != '' or cleanedData.get('password1') != None)):
-            if (len(cleanedData.get('password1')) < 8): 
-                raise forms.ValidationError('Password must have at least 8 characters')
-    
-            if (cleanedData.get('password1') != cleanedData.get('password2')):
-                raise forms.ValidationError('Passwords don\'t match')
-
-        if (cleanedData.get('avatar') != None):
-            image = cleanedData.get('avatar')
-            if (image):
-                if (image._size > 2 * 1024 * 1024):
-                    raise forms.ValidationError('Image too large (> 2MB).')
-        '''
-        return cleanedData
-
-
+        return self.cleaned_data

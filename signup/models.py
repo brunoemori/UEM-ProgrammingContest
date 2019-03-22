@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 import os
+import io
+from PIL import Image
 
 class UserManager(BaseUserManager):
     def createUser(self, email, password, username, **extraFields):
@@ -28,20 +31,21 @@ class UserManager(BaseUserManager):
 
         return self.createUser(email, password, username, **extraFields)
 
-def get_avatar_path(instance, filename):
-    return os.path.join('static/profile_pics/' + str(instance.id), filename)
+def defaultAvatar():
+    with open('static/profile_pics/default.jpeg', 'rb') as f:
+        return bytearray(f.read())
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     firstName = models.CharField(max_length=64, blank=False)
     lastName = models.CharField(max_length=64, blank=False)
     username = models.CharField(max_length=32, unique=True)
-    bio = models.CharField(max_length=128, blank=True)
+    bio = models.CharField(max_length=256, blank=True)
     email = models.EmailField(max_length=128, default='')
     isUserOnline = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     numArticles = models.PositiveIntegerField(default=0)
     dateJoined = models.DateTimeField(auto_now_add=True)
-    avatar = models.ImageField(blank=True, upload_to=get_avatar_path, default='static/profile_pics/default.jpeg')
+    avatar = models.BinaryField(blank=True, null=True, default=defaultAvatar, editable=True)
 
     USERNAME_FIELD = 'username'
 
@@ -69,3 +73,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     @property
     def isStaff(self):
         return self.is_staff
+
+    def getAvatarImage(self):
+        if (self.avatar != None):
+            avatar = Image.open(io.BytesIO(self.avatar))
+            imgPath = ''
+            try:
+                imgPath = 'static/profile_pics/' + str(self.id) + '.jpeg'
+                avatar.save(imgPath)
+            except OSError:
+                imgPath = 'static/profile_pics/' + str(self.id) + '.png'
+                avatar.save(imgPath)
+    
+            return imgPath

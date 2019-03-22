@@ -14,7 +14,7 @@ def getPage(request, articleUrl):
         article = Article.objects.get(problemNumber=articleUrl)
     
     except Article.DoesNotExist:
-        #TO_DO: If page doesn't exist, implement an option to create it.
+        #TODO: If page doesn't exist, implement an option to create it.
         return HttpResponse('<h5> This page does not exist. </h5>')
 
     return render(request, 'wiki/wiki.html', {'article': article, 'user': request.user})

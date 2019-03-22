@@ -75,7 +75,6 @@ h2 {
   #sideNav {
     text-align: center;
     position: fixed;
-    top: 0;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -84,13 +83,7 @@ h2 {
   }
   #sideNav .navbar-brand {
     display: flex;
-    margin: auto auto 0;
-    padding: 0.5rem;
-  }
-  #sideNav .navbar-brand .img-profile {
-    max-width: 10rem;
-    max-height: 10rem;
-    border: 0.5rem solid rgba(255, 255, 255, 0.2);
+    margin:auto 0 0;
   }
   #sideNav .navbar-collapse {
     display: flex;
@@ -153,10 +146,16 @@ body {
   background: #e5e5e5!important;
 }
 
-a {
-  color: #103644;
+.wrapper {
+  padding: 50px;
 }
 
-a:hover, a:focus, a:active {
-  color: #8e9fa5;
+.imageCenterer {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid #343a40;
+  object-fit: cover;
+  object-position: center right;
+  overflow: hidden;
 }

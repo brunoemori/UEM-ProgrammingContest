@@ -19,7 +19,7 @@ def userPreferences(request):
             lastName = cleanedData.get('lastName')
             email = cleanedData.get('email')
             bio = cleanedData.get('bio')
-            #avatar = cleanedData.get('avatar')
+            avatar = cleanedData.get('avatar')
             useDefault = cleanedData.get('useDefaultAvatar')
             passw1 = cleanedData.get('password1')
             passw2 = cleanedData.get('password2')
@@ -54,17 +54,15 @@ def userPreferences(request):
                 else:
                     user.bio = bio
             
-            '''
             if (avatar):
-                if (avatar._size > 2 * 1024 * 1024):
+                if (avatar.size > 2 * 1024 * 1024):
                     messages.error(request, 'Image too large (> 2MB)')
                     return redirect('/prefs')
                 else:
-                    user.avatar = request.FILES['avatar']
+                    user.avatar = request.FILES['avatar'].read()
 
             if (useDefault):
                 user.avatar = CustomUser._meta.get_field('avatar').get_default()
-            '''
 
             if (passw1 != ''):
                 if (len(passw1) < 8):
@@ -77,7 +75,8 @@ def userPreferences(request):
                     user.set_password(passw1)
 
             user.save()
-            messages.success(request, 'Preferences saved.')
+            messages.success(request, 'Preferences saved!')
+            return redirect('/prefs')
 
         else:
             form = UserPrefsForm()
