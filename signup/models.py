@@ -1,17 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
-import os
-import io
 from PIL import Image
+from pcwiki import const
+
+import io
+
 
 class UserManager(BaseUserManager):
     def createUser(self, email, password, username, **extraFields):
-        if (not password):
+        if not password:
             raise ValueError("User must have a password.")
 
-        if (not username):
+        if not username:
             raise ValueError('User must have an username')
+
+        if len(username) < const.USER_USERNAME_MINLENGTH:
+            raise ValueError('Username must have at least' + const.USER_USERNAME_MINLENGTH + 'characters.')
         
         if (email):
             email = self.normalize_email(email)
@@ -32,20 +36,21 @@ class UserManager(BaseUserManager):
         return self.createUser(email, password, username, **extraFields)
 
 def defaultAvatar():
-    with open('static/profile_pics/default.jpeg', 'rb') as f:
+    with open(const.PROFILE_PICS_PATH + const.DEFAULT_PROFILE_PIC, 'rb') as f:
         return bytearray(f.read())
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    firstName = models.CharField(max_length=64, blank=False)
-    lastName = models.CharField(max_length=64, blank=False)
-    username = models.CharField(max_length=32, unique=True)
-    bio = models.CharField(max_length=256, blank=True)
-    email = models.EmailField(max_length=128, default='')
+    firstName = models.CharField(max_length=const.USER_FIRSTNAME_MAXLENGTH, blank=False)
+    lastName = models.CharField(max_length=const.USER_LASTNAME_MAXLENGTH, blank=False)
+    username = models.CharField(max_length=const.USER_USERNAME_MAXLENGTH, unique=True)
+    bio = models.CharField(max_length=const.USER_BIO_MAXLENGHT, blank=True)
+    email = models.EmailField(max_length=const.USER_EMAIL_MAXLENGTH, default='')
     isUserOnline = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     numArticles = models.PositiveIntegerField(default=0)
     dateJoined = models.DateTimeField(auto_now_add=True)
-    avatar = models.BinaryField(blank=True, null=True, default=defaultAvatar, editable=True)
+    avatar = models.BinaryField(max_length=const.USER_AVATAR_MAXSIZE, blank=True, null=True,
+                                 default=defaultAvatar, editable=True)
 
     USERNAME_FIELD = 'username'
 
@@ -55,7 +60,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     def save(self, *args, **kwargs):
-        if (self.id == None):
+        if self.id is None:
             img = self.avatar
             self.avatar = None
             super(CustomUser, self).save(*args, **kwargs)
@@ -75,9 +80,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.is_staff
 
     def getAvatarImage(self):
-        if (self.avatar != None):
+        if self.avatar is not None:
             avatar = Image.open(io.BytesIO(self.avatar))
-            imgPath = 'static/profile_pics/' + str(self.id) + '.png'
-            avatar.save(imgPath)
+            with open(const.PROFILE_PICS_PATH + const.DEFAULT_PROFILE_PIC, 'rb') as f:
+                if avatar == f.read():
+                    imgPath = const.PROFILE_PICS_PATH + const.DEFAULT_PROFILE_PIC
+                else:
+                    imgPath = const.PROFILE_PICS_PATH + str(self.id) + '.png'
+                    avatar.save(imgPath)
     
             return imgPath

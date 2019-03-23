@@ -11,8 +11,8 @@ def signup(request):
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid(request):
             user = createUser(request, form)
-            auth_login(request, user)
             authenticateUser(form.cleaned_data['username'], form.cleaned_data['password1'], request)
+            auth_login(request, user)
             return redirect('/home')
 
     else:
