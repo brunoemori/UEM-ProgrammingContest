@@ -2,5 +2,9 @@ from django.contrib.auth import authenticate
 
 def authenticateUser(usern, passw, request):
     user = authenticate(username=usern, password=passw)
-    user.isUserOnline = True
-    user.save()
+
+    if user is not None:
+        user.isUserOnline = True
+        user.save()
+
+    return user
