@@ -77,12 +77,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def getAvatarImage(self):
         if (self.avatar != None):
             avatar = Image.open(io.BytesIO(self.avatar))
-            imgPath = ''
-            try:
-                imgPath = 'static/profile_pics/' + str(self.id) + '.jpeg'
-                avatar.save(imgPath)
-            except OSError:
-                imgPath = 'static/profile_pics/' + str(self.id) + '.png'
-                avatar.save(imgPath)
+            imgPath = 'static/profile_pics/' + str(self.id) + '.png'
+            avatar.save(imgPath)
     
             return imgPath

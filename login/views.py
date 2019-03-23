@@ -5,6 +5,8 @@ from django.contrib.auth import login as auth_login
 from django.template import loader
 from .forms import UserLoginForm
 
+from .services import *
+
 def login(request):
     form = UserLoginForm(request.POST or None)
 
@@ -12,12 +14,9 @@ def login(request):
         usern = form.cleaned_data.get('username')
         passw = form.cleaned_data.get('password')
 
-        user = authenticate(username=usern, password=passw)
-        auth_login(request, user)
-        user.isUserOnline = True
-        user.save()
+        authenticateUser(usern, passw, request)
 
-        print("User " + user.firstName + " " + user.lastName + " logged in")
-        return redirect('/home/')
-    
-    return render(request, 'login/login.html', {'form': form})
+        return redirect('/home')
+
+    else:
+        return render(request, 'login/login.html', {'form': form})

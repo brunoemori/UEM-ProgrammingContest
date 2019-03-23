@@ -38,7 +38,6 @@ def newPage(request):
     else:
         form = ArticleForm()
     
-    print(form.errors)
     return render(request, 'wiki/newpage.html', {"form": form})
 
 @login_required
